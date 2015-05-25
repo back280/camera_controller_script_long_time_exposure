@@ -43,31 +43,24 @@ except ImportError:
     print "$ sudo apt-get install python-picamera python3-picamera"
     sys.exit()
 
-def lighton(led1, led2, led3, led4):
+def lighton(led1):
     GPIO.output(led1, GPIO.HIGH)
-    GPIO.output(led2, GPIO.HIGH)
-    GPIO.output(led3, GPIO.HIGH)
-    GPIO.output(led4, GPIO.HIGH)
 
 
-def lightoff(led1, led2, led3, led4):
+
+def lightoff(led1):
     GPIO.output(led1, GPIO.LOW)
-    GPIO.output(led2, GPIO.LOW)
-    GPIO.output(led3, GPIO.LOW)
-    GPIO.output(led4, GPIO.LOW)
+
 ##
 #Add more LEDs as arguments
 #
-def setup(led1, led2, led3, led4):
+def setup(led1):
     """Setup all that stuff"""
     print "setup GPIO"
     global TIMESTAMP
     GPIO.setwarnings(True)
     GPIO.setmode(GPIO.BOARD)
     GPIO.setup(led1, GPIO.OUT)
-    GPIO.setup(led2, GPIO.OUT)
-    GPIO.setup(led3, GPIO.OUT)
-    GPIO.setup(led4, GPIO.OUT)
     if not os.path.exists(IMAGEFOLDER):
         print "folder does not exists. Create it"
         os.makedirs(IMAGEFOLDER)
@@ -79,7 +72,7 @@ def setup(led1, led2, led3, led4):
 # now run all of that
 if __name__ == '__main__':
     try:
-        setup(11, 12, 15, 16)
+        setup(11)
         print "GPIO all set up"
         cam = picamera.PiCamera()
         # this is just for testing
@@ -89,19 +82,17 @@ if __name__ == '__main__':
 	
 	###################
 
-	#time.sleep(0.2)
 	GPIO.output(11,GPIO.HIGH)
 	# Set a framerate of 1/6fps, then set shutter
     	# speed to 6s and ISO to 800
     	cam.framerate = Fraction(1, 1)
-    	cam.shutter_speed = 1000000 			# 1000000
-    	cam.exposure_mode = 'off' 			# off
-    	cam.iso = 100 					# 100
-	cam.awb_mode = 'off'				# off
-	cam.awb_gains = 1.7				# 1.6 oder 2.0
+    	cam.shutter_speed = 1000000 			
+    	cam.exposure_mode = 'off' 			
+    	cam.iso = 100 					
+	cam.awb_mode = 'off'				
+	cam.awb_gains = 1.7				
 	# Give the camera a good long time to measure AWB
-    	# (you may wish to use fixed AWB instead)
-    	# time.sleep(10)
+    	# (you may wish to use fixed AWB instead) #time.sleep(10)
 
 	###################
 	
